@@ -4,6 +4,7 @@ import { todayDate, validate } from '../../../utils'
 import TaskViewerContext from '../../../context/TaskViewerContext'
 import useInput from '../../../hooks/useInput'
 import './TaskFiller.scss'
+import { localStorageKey } from '../../../constants'
 
 const TaskFiller = ({ dataHandler }) => {
   const [valid, setValid] = useState(false)
@@ -16,6 +17,10 @@ const TaskFiller = ({ dataHandler }) => {
     validate(taskValue, dateValue) ? setValid(true) : setValid(false)
   }, [taskValue, dateValue])
 
+  const loadDataToLocalStorage = (data) => {
+    localStorage.setItem(localStorageKey, JSON.stringify(data))
+  }
+
   const handler = () => {
     const dateFormat = new Date(dateValue)
     const taskObj = {
@@ -25,9 +30,9 @@ const TaskFiller = ({ dataHandler }) => {
     }
     const data = [...taskList, taskObj]
     setTaskList(data)
+    loadDataToLocalStorage(data) //handle for the refresh page
 
-    //resetting the values
-    taskReset()
+    taskReset() //resetting the values
     if (descriptionValue) {
       descriptionReset()
     }
