@@ -1,0 +1,16 @@
+.card-container {
+  width: 100%;
+  border: 1px solid black;
+  display: flex;
+  padding: 16px;
+  max-width: calc(100% - 48px);
+  .card-left {
+    width: 70%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .card-right {
+    width: 30%;
+  }
+}
